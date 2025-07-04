@@ -21,6 +21,21 @@ export default function Index() {
         <div className="absolute bottom-20 right-10 text-pink-300/30 text-4xl animate-pulse delay-500">
           ⭐
         </div>
+
+        {/* Rolla's cute signature */}
+        <div className="absolute top-32 right-4 md:right-10 flex items-center gap-3 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border-2 border-pink-200/50 animate-bounce delay-700">
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets%2F1b77b1e70c5c43b785bba93851bfb410%2F4ac45ea9b7ab43a9aa5c24e6ab374243?format=webp&width=800"
+            alt="Cute kawaii emoji"
+            className="w-8 h-8 md:w-10 md:h-10"
+          />
+          <div className="text-sm md:text-base">
+            <div className="font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+              Rolla Assad
+            </div>
+            <div className="text-xs text-muted-foreground">Kawaii Creator</div>
+          </div>
+        </div>
       </div>
 
       {/* Main content */}
