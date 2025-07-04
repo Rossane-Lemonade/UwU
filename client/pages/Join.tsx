@@ -14,12 +14,35 @@ export default function Join() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Create email content
-    const subject = encodeURIComponent("New UwU Community Member! 🎉");
-    const body = encodeURIComponent(`Hi Rolla!
+    try {
+      // Use fetch to submit to Netlify Forms
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "uwu-community",
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }).toString(),
+      });
+
+      if (response.ok) {
+        alert(
+          "Welcome to the UwU community! 🎉 Your message has been sent to Rolla!",
+        );
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      // Fallback to email client
+      const subject = encodeURIComponent("New UwU Community Member! 🎉");
+      const body = encodeURIComponent(`Hi Rolla!
 
 A new kawaii soul wants to join the UwU community! ✨
 
@@ -29,13 +52,9 @@ What makes them UwU: ${formData.message || "They didn't share, but they're proba
 
 Sent with love from the UwU website 🌸`);
 
-    // Open email client
-    window.open(`mailto:rolla.uni@gmail.com?subject=${subject}&body=${body}`);
-
-    // Show success message
-    alert(
-      "Welcome to the UwU community! 🎉 Your message is being sent to Rolla!",
-    );
+      window.open(`mailto:rolla.uni@gmail.com?subject=${subject}&body=${body}`);
+      alert("Opening your email client to send the message to Rolla! 💖");
+    }
   };
 
   const handleChange = (
@@ -142,7 +161,18 @@ Sent with love from the UwU website 🌸`);
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-6"
+                name="uwu-community"
+                method="POST"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+              >
+                {/* Hidden field for Netlify Forms */}
+                <input type="hidden" name="form-name" value="uwu-community" />
+                {/* Honeypot field for spam protection */}
+                <input type="hidden" name="bot-field" />
                 <div className="space-y-2">
                   <Label htmlFor="name" className="flex items-center gap-2">
                     <User className="h-4 w-4" />
