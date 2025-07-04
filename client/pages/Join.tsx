@@ -17,32 +17,40 @@ export default function Join() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    try {
-      // Use fetch to submit to Netlify Forms
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          "form-name": "uwu-community",
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        }).toString(),
-      });
+    // Check if we're on Netlify (production) or development
+    const isNetlify =
+      window.location.hostname.includes("netlify") ||
+      window.location.hostname.includes(".app");
 
-      if (response.ok) {
-        alert(
-          "Welcome to the UwU community! 🎉 Your message has been sent to Rolla!",
-        );
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        throw new Error("Form submission failed");
+    if (isNetlify) {
+      // Try Netlify Forms for production
+      try {
+        const response = await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            "form-name": "uwu-community",
+            name: formData.name,
+            email: formData.email,
+            message: formData.message,
+          }).toString(),
+        });
+
+        if (response.ok) {
+          alert(
+            "Welcome to the UwU community! 🎉 Your message has been sent to Rolla!",
+          );
+          setFormData({ name: "", email: "", message: "" });
+          return;
+        }
+      } catch (error) {
+        console.error("Netlify form error:", error);
       }
-    } catch (error) {
-      console.error("Error:", error);
-      // Fallback to email client
-      const subject = encodeURIComponent("New UwU Community Member! 🎉");
-      const body = encodeURIComponent(`Hi Rolla!
+    }
+
+    // Use email client for development or as fallback
+    const subject = encodeURIComponent("New UwU Community Member! 🎉");
+    const body = encodeURIComponent(`Hi Rolla!
 
 A new kawaii soul wants to join the UwU community! ✨
 
@@ -52,9 +60,13 @@ What makes them UwU: ${formData.message || "They didn't share, but they're proba
 
 Sent with love from the UwU website 🌸`);
 
-      window.open(`mailto:rolla.uni@gmail.com?subject=${subject}&body=${body}`);
-      alert("Opening your email client to send the message to Rolla! 💖");
-    }
+    window.open(`mailto:rolla.uni@gmail.com?subject=${subject}&body=${body}`);
+    alert(
+      "Welcome to the UwU community! 🎉 Please send the email that just opened to complete your registration!",
+    );
+
+    // Clear form
+    setFormData({ name: "", email: "", message: "" });
   };
 
   const handleChange = (
