@@ -16,9 +16,26 @@ export default function Join() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    alert("Welcome to the UwU community! 🎉");
+
+    // Create email content
+    const subject = encodeURIComponent("New UwU Community Member! 🎉");
+    const body = encodeURIComponent(`Hi Rolla!
+
+A new kawaii soul wants to join the UwU community! ✨
+
+Name: ${formData.name}
+Email: ${formData.email}
+What makes them UwU: ${formData.message || "They didn't share, but they're probably super cute anyway! 💖"}
+
+Sent with love from the UwU website 🌸`);
+
+    // Open email client
+    window.open(`mailto:rolla.uni@gmail.com?subject=${subject}&body=${body}`);
+
+    // Show success message
+    alert(
+      "Welcome to the UwU community! 🎉 Your message is being sent to Rolla!",
+    );
   };
 
   const handleChange = (
@@ -198,13 +215,11 @@ export default function Join() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
             <div>
-              <div className="text-4xl font-black text-pink-500 mb-2">10k+</div>
+              <div className="text-4xl font-black text-pink-500 mb-2">∞</div>
               <div className="text-muted-foreground">Happy Members</div>
             </div>
             <div>
-              <div className="text-4xl font-black text-purple-500 mb-2">
-                50k+
-              </div>
+              <div className="text-4xl font-black text-purple-500 mb-2">∞</div>
               <div className="text-muted-foreground">UwUs Shared</div>
             </div>
             <div>
@@ -214,6 +229,19 @@ export default function Join() {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="border-t border-border/50 bg-background/80 backdrop-blur-sm">
+        <div className="container mx-auto px-4 py-8 text-center">
+          <div className="text-2xl mb-4">UwU</div>
+          <p className="text-muted-foreground">
+            Made with 💖 by{" "}
+            <span className="font-semibold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+              Rolla Assad
+            </span>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -149,7 +149,10 @@ export default function Index() {
         <div className="container mx-auto px-4 py-8 text-center">
           <div className="text-2xl mb-4">UwU</div>
           <p className="text-muted-foreground">
-            Made with 💖 and endless cups of bubble tea
+            Made with 💖 and endless cups of bubble tea by{" "}
+            <span className="font-semibold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+              Rolla Assad
+            </span>
           </p>
           <p className="text-sm text-muted-foreground mt-2">
             © 2024 UwU Zone. Spreading cuteness across the internet.

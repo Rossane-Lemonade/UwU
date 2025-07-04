@@ -159,6 +159,19 @@ export default function Learn() {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="border-t border-border/50 bg-background/80 backdrop-blur-sm">
+        <div className="container mx-auto px-4 py-8 text-center">
+          <div className="text-2xl mb-4">UwU</div>
+          <p className="text-muted-foreground">
+            Made with 💖 by{" "}
+            <span className="font-semibold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+              Rolla Assad
+            </span>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
