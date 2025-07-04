@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Heart, Sparkles, Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Index() {
   return (
@@ -45,21 +46,25 @@ export default function Index() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            >
-              <Heart className="mr-2 h-5 w-5" />
-              Explore Cuteness
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="px-8 py-4 text-lg font-semibold border-2 hover:bg-primary/10 transition-all duration-300"
-            >
-              <Sparkles className="mr-2 h-5 w-5" />
-              Learn More
-            </Button>
+            <Link to="/explore">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              >
+                <Heart className="mr-2 h-5 w-5" />
+                Explore Cuteness
+              </Button>
+            </Link>
+            <Link to="/learn">
+              <Button
+                variant="outline"
+                size="lg"
+                className="px-8 py-4 text-lg font-semibold border-2 hover:bg-primary/10 transition-all duration-300"
+              >
+                <Sparkles className="mr-2 h-5 w-5" />
+                Learn More
+              </Button>
+            </Link>
           </div>
 
           {/* Stats/Features */}
@@ -130,9 +135,11 @@ export default function Index() {
               </Badge>
             </div>
 
-            <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-              Join the UwU Revolution
-            </Button>
+            <Link to="/join">
+              <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                Join the UwU Revolution
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
